@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SZHAN'S CONVERT PAGE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .card {
+      max-width: 400px;
+      margin: auto;
+      background: linear-gradient(#ffd6e7, #f3c1d9);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #6b2b4a;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 12px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background: #c97aa3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .output {
+      margin-top: 15px;
+      padding: 10px;
+      background: white;
+      border-radius: 8px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>SZHAN'S CONVERT PAGE</h2>
+
+    <label>Choose Conversion:</label>
+    <select id="type">
+      <option value="home">Universal Homepage Link</option>
+      <option value="product">Product Link</option>
+    </select>
+
+    <label>Affiliate ID:</label>
+    <input id="affiliate" placeholder="Enter affiliate ID">
+
+    <label>Referral Code:</label>
+    <input id="referral" placeholder="Enter referral code">
+
+    <label>Paste SHEIN Link:</label>
+    <input id="shein" placeholder="https://m.shein.com/...">
+
+    <button onclick="generateLink()">Generate</button>
+
+    <div id="result" class="output"></div>
+
+    <button onclick="copyLink()">COPY LINK</button>
+  </div>
+
+  <script>
+    function generateLink() {
+      const type = document.getElementById("type").value;
+      const affiliate = document.getElementById("affiliate").value;
+      const referral = document.getElementById("referral").value;
+      const shein = document.getElementById("shein").value;
+
+      if (!affiliate || !shein) {
+        alert("Please fill required fields");
+        return;
+      }
+
+      let finalLink = "";
+
+      if (type === "home") {
+        finalLink = `https://shein.com?aff_id=${affiliate}&ref=${referral}`;
+      } else {
+        finalLink = `${shein}?aff_id=${affiliate}&ref=${referral}`;
+      }
+
+      document.getElementById("result").innerText = finalLink;
+    }
+
+    function copyLink() {
+      const text = document.getElementById("result").innerText;
+      if (!text) return;
+
+      navigator.clipboard.writeText(text);
+      alert("Link copied!");
+    }
+  </script>
+
+</body>
+</html>
